@@ -2,10 +2,21 @@ import java.util.Properties;
 import java.io.InputStream;
 import java.io.IOException;
 
+/**
+ * ConfigLoader is responsible for loading and validating configuration settings from a properties file.
+ * It provides methods to retrieve various configuration values required by the application, such as server URLs,
+ * client credentials, and operational parameters.
+ */
 public class ConfigLoader {
 
     private Properties properties;
 
+    /**
+     * Constructs a new ConfigLoader.
+     * Loads configuration properties from the 'config.properties' file and validates the presence of all required properties.
+     *
+     * @throws IOException If the 'config.properties' file cannot be found or if any required property is missing.
+     */
     public ConfigLoader() throws IOException {
         this.properties = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
