@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  * The IdentityLinkResetter class is responsible for managing user accounts and their federated identity links in a Keycloak environment.
  * It provides functionality to delete all users in a specified realm and to remove orphaned federated identity links.
  * This class utilizes external configuration for setting up the connection to the Keycloak server and other operational parameters.
+ *
+ * This class is not thread-safe and is intended to be used in a single-threaded context.
  */
 public class IdentityLinkResetter {
 
@@ -31,7 +33,7 @@ public class IdentityLinkResetter {
     private final int userMax;
     private final List<String> deletedUsers = new ArrayList<>();
     private final List<String> deletedFederatedLinks = new ArrayList<>();
-    static final Logger LOGGER = Logger.getLogger(IdentityLinkResetter.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IdentityLinkResetter.class.getName());
 
     static {
         LOGGER.setUseParentHandlers(false);
@@ -188,7 +190,6 @@ public class IdentityLinkResetter {
      * @throws IOException If there's an issue loading the configuration.
      */
     public static void main(String[] args) throws IOException {
-        IdentityLinkResetter idirAadLinkReset = new IdentityLinkResetter();
-        idirAadLinkReset.execute();
+        new IdentityLinkResetter().execute();
     }
 }
