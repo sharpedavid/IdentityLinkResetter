@@ -88,8 +88,8 @@ public class IdentityLinkResetter {
         var output = """
                 This %s a dry run.
                 Running against %s.
-                Will delete all users in realm %s.
-                Will delete all links to realm %s from realm %s.
+                This will delete all users in realm %s.
+                This will delete all links to realm %s from realm %s.
                 """;
 
         System.out.printf((output) + "%n", realRun ? "IS NOT" : "IS", serverUrl, idpRealm, idpRealm, applicationRealm);
@@ -106,6 +106,9 @@ public class IdentityLinkResetter {
      * @param realm The realm from which users will be deleted.
      */
     private void deleteAllUsers(String realm) {
+        if (realm.equalsIgnoreCase("moh_applications")) {
+            throw new IllegalStateException("Do not delete users in this realm!");
+        }
         LOGGER.log(Level.INFO, "Deleting all users in realm {0}.", realm);
         List<UserRepresentation> users = getUsers(realm);
         for (UserRepresentation user : users) {

@@ -11,7 +11,7 @@ The Identity Link Resetter is a Java application designed to manage user account
 
 ## Prerequisites
 
-- Java JDK 11 or later.
+- Java JDK 17 or later.
 - Access to a Keycloak server.
 - A service account with relevant permissions to manage users and federated identity links in Keycloak. This should be created in the `master` realm with permissions on all targeted realms. 
 
