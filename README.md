@@ -34,7 +34,7 @@ The application uses a properties file (`config.properties`) for configuration.
 Run the application inside your IDE or using the following command:
 
 ```shell
-java -cp "target/IdirAadUserLinkReset-1.0-SNAPSHOT.jar;target/dependency/*" IdentityLinkResetter
+java -jar target/IdentityLinkResetter.jar
 ```
 
 Follow the on-screen instructions to proceed with the user and federated link deletion process.
