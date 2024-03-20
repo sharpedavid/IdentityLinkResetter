@@ -135,6 +135,7 @@ public class IdentityLinkResetter {
         LOGGER.log(Level.INFO, "Deleting all {0} links in realm {1}.", new Object[]{identityProviderRealm, realm});
         List<UserRepresentation> users = getUsers(realm);
         for (UserRepresentation user : users) {
+            // We make explicit calls to get the user by ID because RealmResource::UserResource::list does not hydrate federated identities.
             List<FederatedIdentityRepresentation> federatedIdentities = keycloak.realm(realm).users().get(user.getId()).getFederatedIdentity();
             for (FederatedIdentityRepresentation fedIdentity : federatedIdentities) {
                 if (fedIdentity.getIdentityProvider().equals(identityProviderRealm)) {
